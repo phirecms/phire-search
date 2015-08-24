@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title><?=$title; ?></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="all" />
+
+</head>
+
+<body>
+    <h1><?=$title; ?></h1>
+<?=$pages;?>
+<?php if (isset($items) && (count($items) > 0)): ?>
+<?php foreach ($items as $item): ?>
+    <div class="item-div">
+        <h3><a href="<?=$item->uri; ?>"><?=$item->title; ?></a></h3>
+    </div>
+<?php endforeach; ?>
+<?php else: ?>
+    <p>There are no search results.</p>
+<?php endif; ?>
+</body>
+
+</html>
