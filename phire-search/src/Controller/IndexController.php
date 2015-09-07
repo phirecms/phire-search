@@ -36,7 +36,7 @@ class IndexController extends AbstractController
                 $pages = null;
             }
 
-            $this->prepareView('search.phtml');
+            $this->prepareView('search-public/search.phtml');
             $this->view->title = 'Search';
             $this->view->pages = $pages;
             $this->view->items = $items;

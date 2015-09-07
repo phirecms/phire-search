@@ -1,0 +1,30 @@
+<?php include $phireHeader; ?>
+    <h1 class="searches-header"><?=$title; ?></h1>
+<?php if (count($searches) > 0): ?>
+<?php if (null !== $pages): ?>
+    <div class="page-links"><?=$pages; ?></div>
+<?php endif; ?>
+    <form id="searches-form" action="<?=$phireUri . '/searches'; ?>" method="post">
+        <table class="data-table" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <th><a href="<?=$phireUri . '/searches?sort=id';?>">#</a></th>
+                <th><a href="<?=$phireUri . '/searches?sort=keywords';?>">Keywords</a></th>
+                <th><a href="<?=$phireUri . '/searches?sort=results';?>">Results</a></th>
+                <th class="text-center"><input type="checkbox" name="checkall" id="checkall" value="rm_searches" /></th>
+            </tr>
+<?php $i = 1; ?>
+<?php foreach ($searches as $search): ?>
+            <tr>
+                <td><?=$search->id; ?></td>
+                <td><?=$search->keywords; ?></td>
+                <td><?=$search->results; ?></a></td>
+                <td class="text-center"><input type="checkbox" name="rm_searches[]" id="rm_searches<?=$i++; ?>" value="<?=$search->id; ?>" /></td>
+            </tr>
+<?php endforeach; ?>
+        </table>
+        <div id="form-footer"><input type="submit" name="submit" class="process-btn" value="Remove" /></div>
+    </form>
+<?php else: ?>
+    <p>There are currently no searches in the search log.</p>
+<?php endif; ?>
+<?php include $phireFooter; ?>

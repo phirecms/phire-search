@@ -7,8 +7,17 @@
  */
 return [
     'phire-search' => [
-        'prefix' => 'Phire\Search\\',
-        'src'    => __DIR__ . '/../src',
-        'routes' => include 'routes.php'
+        'prefix'     => 'Phire\Search\\',
+        'src'        => __DIR__ . '/../src',
+        'routes'     => include 'routes.php',
+        'resources'  => include 'resources.php',
+        'nav.module' => [
+            'name' => 'Search Log',
+            'href' => '/searches',
+            'acl'  => [
+                'resource'   => 'searches',
+                'permission' => 'index'
+            ]
+        ]
     ]
 ];
