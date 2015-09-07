@@ -2,11 +2,40 @@
 
 namespace Phire\Search\Model;
 
+use Phire\Search\Table\Searches;
 use Phire\Content\Table;
 use Phire\Model\AbstractModel;
 
 class Search extends AbstractModel
 {
+
+    /**
+     * Get all fields
+     *
+     * @param  int    $limit
+     * @param  int    $page
+     * @param  string $sort
+     * @return array
+     */
+    public function getAll($limit = null, $page = null, $sort = null)
+    {
+        $order = $this->getSortOrder($sort, $page);
+
+        if (null !== $limit) {
+            $page = ((null !== $page) && ((int)$page > 1)) ?
+                ($page * $limit) - $limit : null;
+
+            return Searches::findAll([
+                'offset' => $page,
+                'limit'  => $limit,
+                'order'  => $order
+            ])->rows();
+        } else {
+            return Searches::findAll([
+                'order'  => $order
+            ])->rows();
+        }
+    }
 
     /**
      * Execute search
@@ -17,6 +46,8 @@ class Search extends AbstractModel
      */
     public function search($fields, $fieldsLoaded = false)
     {
+        $title = strip_tags($fields['title']);
+
         $selectFields = [
             'id'        => DB_PREFIX . 'content.id',
             'type_id'   => DB_PREFIX . 'content.type_id',
@@ -43,7 +74,7 @@ class Search extends AbstractModel
         }
 
         $sql->select()->where('title LIKE :title');
-        $params['title'] = '%' . $fields['title'] . '%';
+        $params['title'] = '%' . $title . '%';
 
         $sql->select()->orderBy('title', 'ASC');
 
@@ -65,7 +96,56 @@ class Search extends AbstractModel
             }
         }
 
+        $log = new Searches([
+            'keywords'  => $title,
+            'results'   => count($results),
+            'timestamp' => time()
+        ]);
+        $log->save();
+
         return $results;
+    }
+
+    /**
+     * Remove search logs
+     *
+     * @param  array $fields
+     * @return void
+     */
+    public function remove(array $fields)
+    {
+        if (isset($fields['clear_all']) && ($fields['clear_all'])) {
+            $search = new Searches();
+            $search->delete(['id-' => null]);
+        } else if (isset($fields['rm_searches'])) {
+            foreach ($fields['rm_searches'] as $id) {
+                $search = Searches::findById((int)$id);
+                if (isset($search->id)) {
+                    $search->delete();
+                }
+            }
+        }
+    }
+
+    /**
+     * Determine if list of searches has pages
+     *
+     * @param  int $limit
+     * @return boolean
+     */
+    public function hasPages($limit)
+    {
+        return (Searches::findAll()->count() > $limit);
+    }
+
+    /**
+     * Get count of searches
+     *
+     * @return int
+     */
+    public function getCount()
+    {
+        return Searches::findAll()->count();
     }
 
 }

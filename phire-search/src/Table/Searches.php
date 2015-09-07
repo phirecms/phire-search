@@ -4,7 +4,7 @@ namespace Phire\Search\Table;
 
 use Pop\Db\Record;
 
-class Searchs extends Record
+class Searches extends Record
 {
 
     /**

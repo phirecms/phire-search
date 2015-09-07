@@ -22,7 +22,7 @@ class IndexController extends AbstractController
         $search->user_role_id   = (isset($this->sess->user)) ? $this->sess->user->role_id : -1;
         $search->summary_length = $this->application->module('phire-content')->config()['summary_length'];
 
-        if  (isset($fields['title'])) {
+        if (isset($fields['title'])) {
             $items = $search->search($fields, $this->application->isRegistered('phire-fields'));
             if (count($items) > $this->config->pagination) {
                 $page  = $this->request->getQuery('page');

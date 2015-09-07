@@ -10,6 +10,7 @@
                 <th><a href="<?=$phireUri . '/searches?sort=id';?>">#</a></th>
                 <th><a href="<?=$phireUri . '/searches?sort=keywords';?>">Keywords</a></th>
                 <th><a href="<?=$phireUri . '/searches?sort=results';?>">Results</a></th>
+                <th><a href="<?=$phireUri . '/searches?sort=timestamp';?>">Timestamp</a></th>
                 <th class="text-center"><input type="checkbox" name="checkall" id="checkall" value="rm_searches" /></th>
             </tr>
 <?php $i = 1; ?>
@@ -18,11 +19,12 @@
                 <td><?=$search->id; ?></td>
                 <td><?=$search->keywords; ?></td>
                 <td><?=$search->results; ?></a></td>
+                <td><?=date($config->datetime_format, $search->timestamp); ?></a></td>
                 <td class="text-center"><input type="checkbox" name="rm_searches[]" id="rm_searches<?=$i++; ?>" value="<?=$search->id; ?>" /></td>
             </tr>
 <?php endforeach; ?>
         </table>
-        <div id="form-footer"><input type="submit" name="submit" class="process-btn" value="Remove" /></div>
+        <div id="form-footer"><input style="float: right;" type="submit" name="submit" class="process-btn" value="Remove" /><span style="float: right; margin: 5px 15px 0 0;">Clear All? <input type="checkbox" name="clear_all" value="1" /></span></div>
     </form>
 <?php else: ?>
     <p>There are currently no searches in the search log.</p>
