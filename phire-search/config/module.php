@@ -18,6 +18,13 @@ return [
                 'resource'   => 'searches',
                 'permission' => 'index'
             ]
+        ],
+        'events' => [
+            [
+                'name'     => 'app.send.pre',
+                'action'   => 'Phire\Search\Event\Search::setTemplate',
+                'priority' => 1000
+            ]
         ]
     ]
 ];
