@@ -1,6 +1,6 @@
 <?php
 
-namespace Phire\Saerch\Event;
+namespace Phire\Search\Event;
 
 use Pop\Application;
 use Phire\Controller\AbstractController;
@@ -18,7 +18,7 @@ class Search
     public static function setTemplate(AbstractController $controller, Application $application)
     {
         if ($application->isRegistered('phire-templates') && ($controller instanceof \Phire\Search\Controller\IndexController) &&
-            ($controller->hasView()) && $controller->view()->isStream()) {
+            ($controller->hasView())) {
             $template = \Phire\Templates\Table\Templates::findBy(['name' => 'Search']);
             if (isset($template->id)) {
                 if (isset($template->id)) {
@@ -37,7 +37,7 @@ class Search
                 }
             }
         } else if ($application->isRegistered('phire-themes') && ($controller instanceof \Phire\Search\Controller\IndexController) &&
-            ($controller->hasView()) && $controller->view()->isFile()) {
+            ($controller->hasView())) {
             $theme = \Phire\Themes\Table\Themes::findBy(['active' => 1]);
             if (isset($theme->id)) {
                 $themePath = $_SERVER['DOCUMENT_ROOT'] . BASE_PATH . CONTENT_PATH . '/themes/' . $theme->folder . '/';
