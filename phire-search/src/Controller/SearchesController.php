@@ -20,7 +20,7 @@ class SearchesController extends AbstractController
 
         if ($this->request->isPost()) {
             $search->remove($this->request->getPost());
-            $this->sess->setRequestValue('removed', true, 1);
+            $this->sess->setRequestValue('removed', true);
             $this->redirect(BASE_PATH . APP_URI . '/searches');
         } else {
             if ($search->hasPages($this->config->pagination)) {
