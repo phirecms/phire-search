@@ -40,11 +40,11 @@ class Search extends AbstractModel
     /**
      * Execute search
      *
-     * @param  array   $fields
-     * @params boolean $fieldsLoaded
+     * @param  array               $fields
+     * @params \Pop\Module\Manager $modules
      * @return array
      */
-    public function search($fields, $fieldsLoaded = false)
+    public function search($fields, \Pop\Module\Manager $modules)
     {
         $title = strip_tags($fields['title']);
 
@@ -84,7 +84,7 @@ class Search extends AbstractModel
             $roles = unserialize($row->roles);
             if ((count($roles) > 0) && (!in_array($this->user_role_id, $roles))) {
                 unset($results[$i]);
-            } else if ($fieldsLoaded) {
+            } else if ($modules->isRegistered('phire-fields')) {
                 $filters = ['strip_tags' => null];
                 if ($this->summary_length > 0) {
                     $filters['substr'] = [0, $this->summary_length];
@@ -93,6 +93,8 @@ class Search extends AbstractModel
                     'Phire\Content\Model\Content', ['id' => $row->id], 'getById', $filters
                 );
                 $results[$i] = new \ArrayObject($item->toArray(), \ArrayObject::ARRAY_AS_PROPS);
+            } else if ($modules->isRegistered('phire-fields-plus')) {
+                $item = \Phire\FieldsPlus\Model\FieldValue::getModelObject(DB_PREFIX . 'tags', 'Phire\\Content\\Model\\Content', $row->id);
             }
         }
 

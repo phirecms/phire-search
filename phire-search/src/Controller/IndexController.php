@@ -23,7 +23,7 @@ class IndexController extends AbstractController
         $search->summary_length = $this->application->module('phire-content')->config()['summary_length'];
 
         if (isset($fields['title'])) {
-            $items = $search->search($fields, $this->application->isRegistered('phire-fields'));
+            $items = $search->search($fields, $this->application->modules());
             if (count($items) > $this->config->pagination) {
                 $page  = $this->request->getQuery('page');
                 $limit = $this->config->pagination;
