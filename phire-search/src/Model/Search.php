@@ -94,7 +94,11 @@ class Search extends AbstractModel
                 );
                 $results[$i] = new \ArrayObject($item->toArray(), \ArrayObject::ARRAY_AS_PROPS);
             } else if ($modules->isRegistered('phire-fields-plus')) {
-                $item = \Phire\FieldsPlus\Model\FieldValue::getModelObject(DB_PREFIX . 'content', 'Phire\\Content\\Model\\Content', $row->id);
+                $filters = ['strip_tags' => null];
+                if ($this->summary_length > 0) {
+                    $filters['substr'] = [0, $this->summary_length];
+                };
+                $item = \Phire\FieldsPlus\Model\FieldValue::getModelObject(DB_PREFIX . 'content', 'Phire\\Content\\Model\\Content', $row->id, $filters);
             }
         }
 
