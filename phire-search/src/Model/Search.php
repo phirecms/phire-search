@@ -99,6 +99,7 @@ class Search extends AbstractModel
         $log = new Searches([
             'keywords'  => $title,
             'results'   => count($results),
+            'method'    => ($_POST) ? 'post' : 'get',
             'timestamp' => time()
         ]);
         $log->save();

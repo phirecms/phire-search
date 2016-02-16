@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS "[{prefix}]searches" (
   "id" integer NOT NULL DEFAULT nextval('search_id_seq'),
   "keywords" varchar(255) NOT NULL,
   "results" integer NOT NULL,
+  "method" varchar(255) NOT NULL,
   "timestamp" integer NOT NULL,
   PRIMARY KEY ("id")
 ) ;

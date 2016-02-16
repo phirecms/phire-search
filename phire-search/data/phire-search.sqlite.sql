@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS "[{prefix}]searches" (
   "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   "keywords" varchar NOT NULL,
   "results" integer NOT NULL,
+  "method" varchar NOT NULL,
   "timestamp" integer NOT NULL,
   UNIQUE ("id")
 ) ;
