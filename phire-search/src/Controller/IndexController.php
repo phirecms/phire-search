@@ -19,8 +19,8 @@ class IndexController extends AbstractController
         $search = new Model\Search();
         $fields = ($this->request->isPost()) ? $this->request->getPost() : $this->request->getQuery();
 
-        $search->user_role_id   = (isset($this->sess->user)) ? $this->sess->user->role_id : -1;
-        $search->summary_length = $this->application->module('phire-content')->config()['summary_length'];
+        $search->user_role_id = (isset($this->sess->user)) ? $this->sess->user->role_id : -1;
+        $search->filters      = $this->application->module('phire-content')->config()['filters'];
 
         if (isset($fields['title'])) {
             $items = $search->search($fields, $this->application->modules());

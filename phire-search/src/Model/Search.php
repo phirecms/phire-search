@@ -85,12 +85,8 @@ class Search extends AbstractModel
             if ((count($roles) > 0) && (!in_array($this->user_role_id, $roles))) {
                 unset($results[$i]);
             } else if ($modules->isRegistered('phire-fields')) {
-                $filters = ['strip_tags' => null];
-                if ($this->summary_length > 0) {
-                    $filters['substr'] = [0, $this->summary_length];
-                };
                 $item = \Phire\Fields\Model\FieldValue::getModelObject(
-                    'Phire\Content\Model\Content', ['id' => $row->id], 'getById', $filters
+                    'Phire\Content\Model\Content', ['id' => $row->id], 'getById', $this->filters
                 );
                 $results[$i] = new \ArrayObject($item->toArray(), \ArrayObject::ARRAY_AS_PROPS);
             }
