@@ -1,11 +1,32 @@
 <?php
+/**
+ * Phire Search Module
+ *
+ * @link       https://github.com/phirecms/phire-search
+ * @author     Nick Sagona, III <dev@nolainteractive.com>
+ * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @license    http://www.phirecms.org/license     New BSD License
+ */
 
+/**
+ * @namespace
+ */
 namespace Phire\Search\Model;
 
 use Phire\Search\Table\Searches;
 use Phire\Content\Table;
 use Phire\Model\AbstractModel;
 
+/**
+ * Search Model class
+ *
+ * @category   Phire\Search
+ * @package    Phire\Search
+ * @author     Nick Sagona, III <dev@nolainteractive.com>
+ * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @license    http://www.phirecms.org/license     New BSD License
+ * @version    1.0.0
+ */
 class Search extends AbstractModel
 {
 

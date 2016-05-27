@@ -1,11 +1,32 @@
 <?php
+/**
+ * Phire Search Module
+ *
+ * @link       https://github.com/phirecms/phire-search
+ * @author     Nick Sagona, III <dev@nolainteractive.com>
+ * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @license    http://www.phirecms.org/license     New BSD License
+ */
 
+/**
+ * @namespace
+ */
 namespace Phire\Search\Controller;
 
 use Phire\Search\Model;
 use Phire\Controller\AbstractController;
 use Pop\Paginator\Paginator;
 
+/**
+ * Search Index Controller class
+ *
+ * @category   Phire\Search
+ * @package    Phire\Search
+ * @author     Nick Sagona, III <dev@nolainteractive.com>
+ * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @license    http://www.phirecms.org/license     New BSD License
+ * @version    1.0.0
+ */
 class IndexController extends AbstractController
 {
 

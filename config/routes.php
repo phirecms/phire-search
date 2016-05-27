@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phire-search routes
+ */
 return [
     '/search[/]' => [
         'controller' => 'Phire\Search\Controller\IndexController',
